@@ -1,0 +1,17 @@
+:root{
+/* Restrained, cinematic. Long durations, no bounce, no spring. */
+--ease-editorial:cubic-bezier(.22,1,.36,1); /* @kind other */
+--ease-inout:cubic-bezier(.65,0,.35,1); /* @kind other */
+--ease-exit:cubic-bezier(.4,0,1,1); /* @kind other */
+--dur-micro:120ms; /* @kind other */
+--dur-fast:220ms; /* @kind other */
+--dur-base:420ms; /* @kind other */
+--dur-slow:760ms; /* @kind other */
+--dur-reveal:1100ms; /* @kind other */
+--dur-parallax:1600ms; /* @kind other */
+--stagger:90ms; /* @kind other */
+--reveal-shift:28px; /* @kind spacing */
+--parallax-depth:12%; /* @kind other */
+--hover-dim:.62; /* @kind other */
+--press-scale:.985; /* @kind other */
+}
