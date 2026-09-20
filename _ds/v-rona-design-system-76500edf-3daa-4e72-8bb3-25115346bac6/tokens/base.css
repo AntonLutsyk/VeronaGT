@@ -1,0 +1,12 @@
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-base);color:var(--text-body);font:var(--weight-light) var(--text-body)/var(--leading-body) var(--font-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+img{display:block;max-width:100%}
+a{color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--border-accent);transition:color var(--dur-fast) var(--ease-inout),border-color var(--dur-fast) var(--ease-inout)}
+a:hover{color:var(--accent);border-color:var(--accent)}
+::selection{background:var(--champagne-500);color:var(--obsidian-1000)}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.v-eyebrow{font:var(--type-eyebrow);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted)}
+.v-display{font-family:var(--font-display);font-weight:var(--weight-regular);letter-spacing:var(--tracking-display);line-height:var(--leading-display);color:var(--text-primary)}
+.v-rule{height:1px;background:var(--border-hairline);border:0}
+@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important;transition-duration:1ms!important}}
