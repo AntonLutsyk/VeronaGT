@@ -1,0 +1,4 @@
+/* Webfonts. SUBSTITUTION: no brand font files were provided — nearest Google Fonts matches are used.
+   Bodoni Moda stands in for an editorial high-contrast display serif; Archivo for the grotesque UI face. */
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..500&family=Archivo:wght@300;400;500;600&family=Archivo+Narrow:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap");
+:root{--font-display:"Bodoni Moda",Didot,"Times New Roman",serif;--font-sans:"Archivo","Helvetica Neue",Helvetica,sans-serif;--font-condensed:"Archivo Narrow","Archivo",sans-serif;--font-mono:"JetBrains Mono",ui-monospace,monospace}

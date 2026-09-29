@@ -1,0 +1,30 @@
+:root{
+/* --- Base ink / obsidian ramp (dark sections) --- */
+--obsidian-1000:#08080A;--obsidian-900:#0D0E10;--obsidian-800:#141518;--obsidian-700:#1C1E22;--obsidian-600:#26282D;--obsidian-500:#34373D;--obsidian-400:#4A4E55;
+/* --- Bone / warm off-white ramp (editorial sections) --- */
+--bone-050:#FBFAF7;--bone-100:#F4F1EA;--bone-200:#EAE5DB;--bone-300:#DCD5C8;--bone-400:#C4BBAA;--bone-500:#9A9080;
+/* --- Champagne accent (use sparingly) --- */
+--champagne-100:#EFE2C7;--champagne-300:#DCC48F;--champagne-500:#C6A76A;--champagne-600:#AE8F55;--champagne-700:#8A6F3F;
+/* --- Semantic status (instrumentation only) --- */
+--signal-positive:#5E8C6A;--signal-caution:#C08A3E;--signal-critical:#A63D34;--signal-info:#5A6E84;
+
+/* --- Semantic aliases: dark surfaces (default brand mode) --- */
+--surface-base:var(--obsidian-1000);--surface-raised:var(--obsidian-900);--surface-card:var(--obsidian-800);--surface-inset:var(--obsidian-700);
+--text-primary:var(--bone-050);--text-body:rgba(251,250,247,.78);--text-muted:rgba(251,250,247,.55);--text-faint:rgba(251,250,247,.34);
+--text-accent:var(--champagne-500);--text-on-accent:var(--obsidian-1000);
+--border-hairline:rgba(251,250,247,.14);--border-strong:rgba(251,250,247,.28);--border-accent:var(--champagne-600);
+--accent:var(--champagne-500);--accent-hover:var(--champagne-300);--accent-press:var(--champagne-600);
+--overlay-scrim:rgba(8,8,10,.62);
+/* Protection gradient for type over photography */
+--scrim-bottom:linear-gradient(to top,rgba(8,8,10,.92) 0%,rgba(8,8,10,.55) 38%,rgba(8,8,10,0) 78%); /* @kind color */
+--scrim-left:linear-gradient(to right,rgba(8,8,10,.88) 0%,rgba(8,8,10,.35) 45%,rgba(8,8,10,0) 80%); /* @kind color */
+}
+/* --- Editorial (light) section scope --- */
+.v-light{
+--surface-base:var(--bone-100);--surface-raised:var(--bone-050);--surface-card:var(--bone-050);--surface-inset:var(--bone-200);
+--text-primary:var(--obsidian-1000);--text-body:rgba(13,14,16,.80);--text-muted:rgba(13,14,16,.58);--text-faint:rgba(13,14,16,.38);
+--text-accent:var(--champagne-700);--text-on-accent:var(--bone-050);
+--border-hairline:rgba(13,14,16,.14);--border-strong:rgba(13,14,16,.30);--border-accent:var(--champagne-600);
+--accent:var(--champagne-600);--accent-hover:var(--champagne-700);--accent-press:var(--champagne-700);
+--overlay-scrim:rgba(13,14,16,.45);
+}
