@@ -51,6 +51,9 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
   }
+  @media (max-width: 1280px) { #v-head [data-head-meta], #v-head [data-head-div] { display: none !important; } }
+  @media (max-width: 1180px) { footer [data-fbrand] { flex-basis: 100% !important; padding-right: 0 !important; } footer [data-ffirst] { border-left: 0 !important; padding-left: 0 !important; } }
+  #v-head [data-nav] { white-space: nowrap; }
   /* mobile reflow: reading order becomes editorial → stats → form → image */
   @media (max-width: 760px) {
     #allocation > div:first-of-type { gap: 0 !important; }
@@ -62,7 +65,12 @@
     [data-lenis-prevent] nav a { padding-block: 6px; }
     #figures a, #materia a, #craft a, #collection a { padding-block: 21px 12px !important; }
     #v-head a { padding-block: 3px; }
+    #v-film-sec { aspect-ratio: auto !important; min-height: 0 !important; display: flex; flex-direction: column-reverse; }
+    #v-film { position: relative !important; inset: auto !important; height: auto !important; aspect-ratio: 1024/572; }
+    #v-film-scrim { display: none; }
+    #v-film-type { position: static !important; max-width: 100% !important; padding: 0 20px 28px; }
     #allocation > div:last-of-type a, footer a { padding-block: 14px; }
+    footer nav[data-fcol] { flex-basis: 100% !important; border-left: 0 !important; border-top: 1px solid rgba(251,250,247,.12); padding: 28px 0 0 !important; gap: 4px !important; }
   }
 </style>
 </helmet>
@@ -70,17 +78,25 @@
 <div id="top" style="background:#08080A;color:rgba(251,250,247,.55);font:300 clamp(15px,1.02vw,17px)/1.62 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;overflow-x:hidden;max-width:100%">
 
   <header id="v-head" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px clamp(20px,5vw,88px);background:linear-gradient(rgba(8,8,10,.62),rgba(8,8,10,0));border-bottom:1px solid rgba(251,250,247,0);transition:background .34s ease,border-color .34s ease,box-shadow .34s ease,backdrop-filter .34s ease,padding .34s ease">
-    <a href="#top" style="display:flex;align-items:center"><img id="v-lockup" src="assets/verona-lockup-header.png" alt="VÉRONA" style="height:clamp(40px,4.2vw,50px);width:auto;display:block"></a>
-    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;justify-content:center;gap:7px;width:44px;height:44px;margin-right:-10px;padding:0;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent">
-      <span style="display:block;width:26px;height:1px;background:#FBFAF7;transform:{{ barTopTransform }};transition:transform .34s cubic-bezier(.22,1,.36,1)"></span>
-      <span style="display:block;width:26px;height:1px;background:#FBFAF7;opacity:{{ barMidOpacity }};transition:opacity .2s ease"></span>
-      <span style="display:block;width:26px;height:1px;background:#FBFAF7;transform:{{ barBotTransform }};transition:transform .34s cubic-bezier(.22,1,.36,1)"></span>
-    </button>
-    <nav style="display:{{ navDisplay }};gap:clamp(18px,2.3vw,34px);align-items:center">
-      <a href="#figures" data-nav="figures" style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.58);transition:color .3s ease">The car</a>
-      <a href="#materia" data-nav="materia" style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.58);transition:color .3s ease">Materia</a>
-      <a href="#collection" data-nav="collection" style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.58);transition:color .3s ease">Collection</a>
+    <div style="display:flex;align-items:center;gap:clamp(20px,2.6vw,40px)">
+      <a href="#top" style="flex:none;display:flex;align-items:center"><img id="v-lockup" src="assets/verona-lockup-header.png" alt="VÉRONA" style="flex:none;height:clamp(40px,4.2vw,50px);width:auto;min-width:96px;display:block"></a>
+      <span data-head-div="true" style="display:{{ navDisplay }};flex:none;width:1px;height:40px;background:rgba(251,250,247,.2)"></span>
+      <span data-head-meta="true" style="display:{{ navDisplay }};font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.82);white-space:nowrap">Modena, Italia</span>
+    </div>
+    <nav style="display:{{ navDisplay }};gap:clamp(22px,3vw,48px);align-items:center">
+      <a href="#figures" data-nav="figures" style="padding:10px 0 9px;border-bottom:1px solid transparent;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.86);transition:color .3s ease,border-color .3s ease">The car</a>
+      <a href="#materia" data-nav="materia" style="padding:10px 0 9px;border-bottom:1px solid transparent;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.86);transition:color .3s ease,border-color .3s ease">Materia</a>
+      <a href="#collection" data-nav="collection" style="padding:10px 0 9px;border-bottom:1px solid transparent;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.86);transition:color .3s ease,border-color .3s ease">Collection</a>
+      <a href="#craft" data-nav="craft" style="padding:10px 0 9px;border-bottom:1px solid transparent;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.86);transition:color .3s ease,border-color .3s ease">Experience</a>
     </nav>
+    <div style="display:flex;align-items:center;gap:clamp(18px,2.6vw,44px)">
+      <a data-head-cta="true" href="#allocation" style="display:{{ navDisplay }};align-items:center;gap:26px;padding:16px 26px 16px 30px;border:1px solid rgba(214,184,128,.7);color:#E2C795;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;transition:border-color .22s ease,color .22s ease" style-hover="border-color:#E2C795;color:#F3DEB4">Configure <span style="font-size:14px">→</span></a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:7px;width:44px;height:44px;margin-right:-8px;padding:0;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent">
+        <span data-bar="true" style="display:block;width:28px;height:1px;background:#FBFAF7;transform:{{ barTopTransform }};transition:transform .34s cubic-bezier(.22,1,.36,1)"></span>
+        <span data-bar="true" style="display:block;width:28px;height:1px;background:#FBFAF7;opacity:{{ barMidOpacity }};transition:opacity .2s ease"></span>
+        <span data-bar="true" style="display:block;width:28px;height:1px;background:#FBFAF7;transform:{{ barBotTransform }};transition:transform .34s cubic-bezier(.22,1,.36,1)"></span>
+      </button>
+    </div>
   </header>
 
   <div data-lenis-prevent="true" style="position: fixed; inset: 0; z-index: 55; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(88px,11vh,120px) clamp(20px,5vw,88px) clamp(28px,4vh,44px); background: #08080A; opacity: {{ menuOpacity }}; visibility: {{ menuVisibility }}; pointer-events: {{ menuPointerEvents }}; transition: opacity .42s cubic-bezier(.22,1,.36,1),visibility .42s; left: -2px; top: 8px">
@@ -97,63 +113,76 @@
   </div>
 
   <section id="hero" style="position:relative;height:100svh;min-height:660px;max-height:1080px;overflow:hidden;display:flex;flex-direction:column">
-    <img id="v-heroimg" src="assets/hero-gt-hall-hq.webp" alt="VÉRONA GT Coupé, rear three-quarter in a concrete hall" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:82% 52%;transform:scale(1.05);image-rendering:high-quality">
+    <img id="v-heroimg" src="assets/hero-gt-hall-hq.webp" alt="VÉRONA GT Coupé, rear three-quarter in a concrete hall" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:82% 52%;transform:scale(1.05);filter:saturate(1.18) contrast(1.06);image-rendering:high-quality">
     <div id="v-scrim" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(6,6,8,.93) 0%,rgba(6,6,8,.86) 24%,rgba(6,6,8,.56) 41%,rgba(6,6,8,.2) 55%,rgba(6,6,8,0) 68%)"></div>
     <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,#08080A 0%,rgba(8,8,10,.94) 6%,rgba(8,8,10,.66) 15%,rgba(8,8,10,.3) 26%,rgba(8,8,10,0) 40%),linear-gradient(rgba(6,6,8,.55),rgba(6,6,8,0) 22%)"></div>
     <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 150px 10px rgba(0,0,0,.6)"></div>
 
-    <div data-reveal="0" style="position:absolute;z-index:5;top:clamp(84px,10.5vh,124px);left:clamp(20px,5vw,88px);right:clamp(20px,5vw,88px);display:grid;grid-template-columns:auto minmax(24px,1fr) auto;align-items:center;gap:clamp(14px,2.2vw,32px);font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.46)">
-      <span>Modena, Italia</span>
-      <span style="height:1px;background:rgba(251,250,247,.14)"></span>
-      <span style="display:{{ eyebrowTailDisplay }}">GT Coupé — 2026 series</span>
-    </div>
 
     <div style="position:relative;z-index:5;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,9vh,110px) clamp(20px,5vw,88px) clamp(24px,4vh,48px)">
       <div id="v-type" style="display:flex;flex-direction:column;align-items:flex-start;gap:clamp(18px,2.8vh,34px);width:min(54%,700px);min-width:min(90%,320px)">
         
         
-        <h1 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.7rem,5.6vw,5.8rem);line-height:.94;letter-spacing:-.038em;color:#FBFAF7;text-wrap:balance">Built for<br><span style="font-size:0.78em;color:#979582">the moment</span></h1><p data-reveal="120" style="margin:0;max-width:33ch;color:rgba(251,250,247,.66)">Drawn as one unbroken line, finished by hand in Modena. Six hundred and twelve horsepower, delivered without theatre.</p>
-        <a data-reveal="180" href="#figures" style="display:inline-flex;align-items:center;gap:clamp(20px,2.6vw,40px);margin-top:clamp(2px,1.2vh,12px);padding:clamp(15px,2vh,20px) clamp(22px,2.4vw,32px);white-space:nowrap;border:1px solid rgba(251,250,247,.26);color:rgba(251,250,247,.92);font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;transition:border-color .22s ease,color .22s ease" style-hover="border-color:#C6A76A;color:#FBFAF7">Explore the car <span style="font-size:14px;color:#C6A76A">→</span></a>
+        
+        <h1 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.9rem,6vw,6.4rem);line-height:.98;letter-spacing:-.04em;color:#FBFAF7;text-wrap:balance">Built for<br><span style="color:#B39A6C">the moment</span></h1><p data-reveal="120" style="margin:0;max-width:33ch;font-size:clamp(16px,1.25vw,20px);line-height:1.5;color:rgba(251,250,247,.84)">Drawn as one unbroken line, finished by hand in Modena. Six hundred and twelve horsepower, delivered without theatre.</p>
+        <div data-reveal="180" style="display:flex;flex-wrap:wrap;gap:clamp(12px,1.2vw,18px);margin-top:clamp(4px,1.4vh,14px)">
+          <a href="#figures" style="display:inline-flex;align-items:center;justify-content:space-between;gap:clamp(24px,2.6vw,40px);min-height:56px;padding:0 clamp(24px,2.4vw,38px);box-sizing:border-box;white-space:nowrap;background:#E3C893;color:#0B0B0E;font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;transition:background .22s ease" style-hover="background:#EED6A6;color:#0B0B0E">Explore the car <span style="font-size:15px">→</span></a>
+          
+        </div>
       </div>
     </div>
 
     <div style="position:relative;z-index:5;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:clamp(20px,4vw,64px);padding:0 clamp(20px,5vw,88px) clamp(30px,5.4vh,64px)">
-      <div data-reveal="240" style="display:flex;align-items:stretch;gap:clamp(12px,3vw,48px)">
+      <div data-reveal="240" style="display:flex;flex-direction:column;gap:clamp(28px,5vh,56px)"><div style="display:flex;align-items:stretch;gap:clamp(16px,3.6vw,56px)">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.5rem,2.6vw,2.6rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">612</span><span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">bhp</span></div>
-          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.5)">Power</span>
+          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.9rem,2.9vw,3rem);line-height:1;letter-spacing:-.035em;color:#FBFAF7;font-variant-numeric:tabular-nums">612</span><span style="font:500 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#D9BB80">bhp</span></div>
+          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.88)">Power</span>
         </div>
         <div style="width:1px;background:rgba(251,250,247,.16)"></div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.5rem,2.6vw,2.6rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">2.9</span><span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">sec</span></div>
-          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.5)">0—100 km/h</span>
+          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.9rem,2.9vw,3rem);line-height:1;letter-spacing:-.035em;color:#FBFAF7;font-variant-numeric:tabular-nums">2.9</span><span style="font:500 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#D9BB80">sec</span></div>
+          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.88)">0 – 100 km/h</span>
         </div>
         <div style="width:1px;background:rgba(251,250,247,.16)"></div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.5rem,2.6vw,2.6rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">320</span><span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">km/h</span></div>
-          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.5)">Top speed</span>
+          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:200;font-size:clamp(1.9rem,2.9vw,3rem);line-height:1;letter-spacing:-.035em;color:#FBFAF7;font-variant-numeric:tabular-nums">320</span><span style="font:500 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#D9BB80">km/h</span></div>
+          <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,250,247,.88)">Top speed</span>
         </div>
       </div>
-      <a href="#figures" style="display:{{ scrollCueDisplay }};align-items:center;gap:12px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.5);transition:color .22s ease" style-hover="color:#FBFAF7">
-        <span style="width:34px;height:34px;border:1px solid rgba(251,250,247,.24);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px">↓</span>Scroll
-      </a>
+      <div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,30px);font:400 10px/1.4 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:rgba(251,250,247,.62)"><span style="flex:none;width:80px;height:1px;background:rgba(251,250,247,.5)"></span><span>Italian engineering. Timeless by design.</span></div></div>
+      <a href="#figures" style="display:{{ scrollCueDisplay }};flex-direction:column;align-items:center;gap:16px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#FBFAF7;transition:color .22s ease" style-hover="color:#E3C893"><span style="width:54px;height:54px;border:1px solid rgba(251,250,247,.36);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px"><span style="width:5px;height:5px;border-radius:50%;background:#FBFAF7"></span><span style="width:3px;height:3px;border-radius:50%;background:rgba(251,250,247,.55)"></span></span>Scroll</a>
     </div>
   </section>
 
   <section id="figures" style="padding:clamp(70px,10vh,180px) clamp(20px,5vw,88px)">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));column-gap:clamp(40px,6vw,120px);row-gap:clamp(14px,1.8vh,24px);border-top:1px solid rgba(251,250,247,.13);padding-top:clamp(32px,4.6vh,56px)">
-      <div style="display:flex;flex-direction:column;gap:clamp(24px,4vh,44px);align-items:flex-start">
-        <h2 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.2rem,4.6vw,5.2rem);line-height:.96;letter-spacing:-.038em;color:#FBFAF7"><span style="color:rgba(251,250,247,.3)">Silence,</span><br>then thunder.</h2>
-        <p data-reveal="120" style="margin:0;max-width:34ch">Six hundred and twelve horsepower, delivered without theatre. A twin-turbo V8 mounted low, a chassis tuned for the long road.</p>
-        <div data-reveal="180" style="margin-top:clamp(18px,3.6vh,34px);display:flex;gap:0;border-bottom:1px solid rgba(251,250,247,.13)">
-          <button type="button" onClick="{{ tab0 }}" style="background:none;border:0;border-bottom:1px solid {{ rule0 }};padding:16px 18px 16px 0;min-height:44px;margin:0;cursor:pointer;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:{{ ink0 }};transition:color .22s ease,border-color .22s ease">Powertrain</button>
-          <button type="button" onClick="{{ tab1 }}" style="background:none;border:0;border-bottom:1px solid {{ rule1 }};padding:16px 18px;min-height:44px;margin:0;cursor:pointer;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:{{ ink1 }};transition:color .22s ease,border-color .22s ease">Chassis</button>
-          <button type="button" onClick="{{ tab2 }}" style="background:none;border:0;border-bottom:1px solid {{ rule2 }};padding:16px 18px;min-height:44px;margin:0;cursor:pointer;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:{{ ink2 }};transition:color .22s ease,border-color .22s ease">Cabin</button>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));column-gap:clamp(40px,8vw,160px);row-gap:clamp(48px,7vh,72px);align-items:center">
+      <div style="display:flex;flex-direction:column;gap:clamp(26px,4vh,44px);align-items:flex-start;max-width:560px">
+        <div data-reveal="0" style="align-self:stretch;display:flex;align-items:center;gap:24px;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,250,247,.66)"><span>Performance</span><span style="flex:1;height:1px;background:rgba(251,250,247,.2)"></span></div>
+        <h2 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.6rem,5.2vw,5.6rem);line-height:.98;letter-spacing:-.038em;color:#FBFAF7">Silence,<br><span style="color:#E3C08A">then thunder.</span></h2>
+        <p data-reveal="120" style="margin:0;max-width:34ch;font-size:clamp(16px,1.25vw,20px);line-height:1.5;color:rgba(251,250,247,.8)">Six hundred and twelve horsepower, delivered without theatre. A twin-turbo V8 mounted low, a chassis tuned for the long road.</p>
+        <div data-reveal="180" style="align-self:stretch;margin-top:clamp(8px,2vh,24px);display:flex;gap:clamp(28px,3.4vw,52px);border-bottom:1px solid rgba(251,250,247,.16)">
+          <button type="button" onClick="{{ tab0 }}" style="background:none;border:0;border-bottom:2px solid {{ tabRule0 }};padding:16px 0 15px;margin:0 0 -1px;min-height:44px;cursor:pointer;font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:{{ tabInk0 }};transition:color .22s ease,border-color .22s ease">Powertrain</button>
+          <button type="button" onClick="{{ tab1 }}" style="background:none;border:0;border-bottom:2px solid {{ tabRule1 }};padding:16px 0 15px;margin:0 0 -1px;min-height:44px;cursor:pointer;font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:{{ tabInk1 }};transition:color .22s ease,border-color .22s ease">Chassis</button>
+          <button type="button" onClick="{{ tab2 }}" style="background:none;border:0;border-bottom:2px solid {{ tabRule2 }};padding:16px 0 15px;margin:0 0 -1px;min-height:44px;cursor:pointer;font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:{{ tabInk2 }};transition:color .22s ease,border-color .22s ease">Cabin</button>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start">
-        <sc-if value="{{ isPowertrain }}" hint-placeholder-val="{{ true }}">
+      <div data-reveal="120" style="display:flex;flex-direction:column;align-items:stretch">
+        <sc-for list="{{ specRows }}" as="row" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(16px,2vw,32px);padding:clamp(20px,3vh,30px) 0;border-bottom:1px solid rgba(251,250,247,.12)">
+            <span style="width:clamp(46px,3.6vw,58px);height:clamp(46px,3.6vw,58px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(251,250,247,.14);background:#111114;border-radius:4px;color:#FBFAF7"><span style="width:22px;height:22px;background:currentColor;-webkit-mask:{{ row.mask }};mask:{{ row.mask }}"></span></span>
+            <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+              <span style="font:600 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#FBFAF7">{{ row.k }}</span>
+              <span style="font-size:14px;line-height:1.35;color:rgba(251,250,247,.56)">{{ row.sub }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;text-align:right">
+              <span style="font-weight:300;font-size:clamp(17px,1.55vw,24px);line-height:1.15;letter-spacing:-.01em;color:#FBFAF7">{{ row.v }}</span>
+              <span style="font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,250,247,.5)">{{ row.cap }}</span>
+            </div>
+          </div>
+        </sc-for>
+        <p style="margin:clamp(22px,3vh,32px) 0 0;font:400 10px/1.8 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,247,.46)">{{ specNote }}</p>
+        <sc-if value="{{ false }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column">
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Engine</span><span style="color:rgba(251,250,247,.92)">4.0 V8 biturbo</span></div>
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Output</span><span style="color:rgba(251,250,247,.92)">612 bhp at 6,800 rpm</span></div>
@@ -162,7 +191,7 @@
             <p style="margin:clamp(18px,2.6vh,28px) 0 0;font:400 10px/1.6 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)">Figures provisional · Electronically limited</p>
           </div>
         </sc-if>
-        <sc-if value="{{ isChassis }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ false }}" hint-placeholder-val="{{ false }}" data-legacy="chassis">
           <div style="display:flex;flex-direction:column">
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Structure</span><span style="color:rgba(251,250,247,.92)">Bonded aluminium</span></div>
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Mass</span><span style="color:rgba(251,250,247,.92)">1,640 kg dry</span></div>
@@ -171,7 +200,7 @@
             <p style="margin:clamp(18px,2.6vh,28px) 0 0;font:400 10px/1.6 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)">Rear-wheel steering standard</p>
           </div>
         </sc-if>
-        <sc-if value="{{ isCabin }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ false }}" hint-placeholder-val="{{ false }}" data-legacy="cabin">
           <div style="display:flex;flex-direction:column">
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Hide</span><span style="color:rgba(251,250,247,.92)">Sabbia, single tannery</span></div>
             <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:clamp(16px,2.4vh,26px) 0;border-bottom:1px solid rgba(251,250,247,.13)"><span style="font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.52)">Trim</span><span style="color:rgba(251,250,247,.92)">Brushed alloy, no gloss</span></div>
@@ -184,25 +213,16 @@
     </div>
   </section>
 
-  <section style="position:relative;width:100%;aspect-ratio:1170/643;min-height:340px;max-height:900px;overflow:hidden">
-    <img id="v-film" src="assets/film-gt-front-hq.webp" alt="VÉRONA GT Coupé, front three-quarter at dusk" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; image-rendering: high-quality; -webkit-backface-visibility: hidden; transform: translateZ(0); left: 1px; top: -3px">
-    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(8,8,10,.8) 0%,rgba(8,8,10,.72) 10%,rgba(8,8,10,.54) 22%,rgba(8,8,10,.3) 34%,rgba(8,8,10,.12) 44%,rgba(8,8,10,0) 55%)"></div>
-    <div style="position:absolute;left:clamp(20px,5vw,88px);bottom:clamp(48px,9vh,110px);z-index:3;display:flex;flex-direction:column;gap:18px;max-width:min(78%,900px);pointer-events:none">
-      <p data-reveal="0" style="margin:0;font-weight:200;font-size:clamp(1.7rem,3.9vw,4rem);line-height:1.04;letter-spacing:-.028em;color:#FBFAF7;max-width:20ch">We removed everything that wasn't the car.</p>
-      <p data-reveal="120" style="margin:0;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Lucia Marchetti — chief designer</p>
+  <section id="v-film-sec" style="position:relative;width:100%;aspect-ratio:1024/572;min-height:340px;max-height:960px;overflow:hidden;background:#08080A">
+    <img id="v-film" src="assets/film-gt-mountain-hq.jpg" alt="VÉRONA GT Coupé on a mountain road at dusk" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:saturate(1.08) contrast(1.04);image-rendering:high-quality">
+    <div id="v-film-scrim" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(8,8,10,.78) 0%,rgba(8,8,10,.5) 14%,rgba(8,8,10,.16) 28%,rgba(8,8,10,0) 40%),linear-gradient(90deg,rgba(8,8,10,.7) 0%,rgba(8,8,10,.4) 18%,rgba(8,8,10,0) 32%)"></div>
+    <div id="v-film-type" style="position:absolute;left:clamp(20px,5vw,88px);bottom:clamp(28px,6%,72px);z-index:3;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,22px);max-width:24%;pointer-events:none">
+      <p data-reveal="0" style="margin:0;font-weight:200;font-size:clamp(1.5rem,2.5vw,2.9rem);line-height:1.06;letter-spacing:-.028em;color:#FBFAF7;text-wrap:balance">We removed everything that wasn't the car.</p>
+      <p data-reveal="120" style="margin:0;font:400 10px/1.5 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.7)">Lucia Marchetti — chief designer</p>
     </div>
   </section>
 
-  <section id="materia" data-ground="light" style="position:relative;background:#F2EFE8;color:rgba(11,12,14,.62);width:100%;aspect-ratio:1568/981;min-height:520px;max-height:1000px;overflow:hidden">
-    <img id="v-materia-portrait" src="assets/materia-gt-rear-hq.webp" alt="VÉRONA GT Coupé, rear three-quarter against a warm plaster wall" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;image-rendering:high-quality">
-    <div id="v-materia-scrim" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,#F2EFE8 0%,rgba(242,239,232,.94) 15%,rgba(242,239,232,.62) 29%,rgba(242,239,232,.22) 41%,rgba(242,239,232,0) 54%)"></div>
-    
-    <div style="position: absolute; left: clamp(20px, 5vw, 88px); bottom: clamp(28px, 5vh, 64px); z-index: 3; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(20px,3.4vh,38px); width: min(46%,640px); min-width: min(84%,320px)">
-      <h2 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.2rem,4.8vw,5.2rem);line-height:.94;letter-spacing:-.036em;color:#0B0C0E">Drawn in<br>one line.</h2>
-      <p data-reveal="120" style="margin:0;max-width:34ch;text-wrap:pretty">The silhouette is a single unbroken gesture from the front axle to the rear haunch. No vent is decorative. No crease exists without a reason.</p>
-      <a data-reveal="180" href="#collection" style="display:inline-flex;align-items:center;gap:12px;padding-bottom:7px;border-bottom:1px solid rgba(11,12,14,.22);color:#0B0C0E;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;transition:border-color .22s ease">Read the design brief <span style="font-size:13px">→</span></a>
-    </div>
-  </section>
+  
 
   
 
@@ -275,15 +295,48 @@
         <p style="margin:14px 0 0;font:400 10px/1.6 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(11,12,14,.5)">Sabbia hide · seat back, hand stitch</p>
       </div>
     </div>
-  </section><section style="padding:clamp(70px,10vh,180px) clamp(20px,5vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(16px,2.4vw,32px);align-items:start">
-    <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden">
-      <image-slot id="v-detail-lamp" src="assets/detail-lamp-hq.webp" shape="rect" fit="cover" placeholder="Detail — headlamp signature at dusk, 4:5" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+  </section><section id="expressions" data-ground="light" style="position:relative;background:#F2EFE8;color:rgba(11,12,14,.64);padding:clamp(80px,12vh,180px) clamp(20px,5vw,88px) clamp(80px,12vh,170px);overflow:hidden">
+    
+    <div style="margin-top: clamp(28px,4vh,44px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(28px,4vw,64px)">
+      <h2 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.5rem,5vw,5.4rem);line-height:.98;letter-spacing:-.038em;color:#0B0C0E">Three expressions.<br><span style="color:#9C7C45">One character.</span></h2>
+      <div data-reveal="120" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(24px,3.4vw,56px);padding-bottom:6px">
+        <p style="margin:0;max-width:38ch;font-size:clamp(15px,1.1vw,17px);line-height:1.6;color:rgba(11,12,14,.66);text-wrap:pretty">Different roads, the same unmistakable presence. Each car shows another side of one idea.</p>
+        
+      </div>
     </div>
-    <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;margin-top:max(0px, min(72px, (100vw - 640px) * .2))" data-par="-5">
-      <image-slot id="v-detail-skin" src="assets/detail-skin-hq.webp" shape="rect" fit="cover" placeholder="Detail — door skin reflection, 4:5" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+
+    <div data-reveal="180" style="position:relative;margin-top:clamp(56px,8vh,96px);width:100%;aspect-ratio:{{ stageRatio }}">
+      <sc-for list="{{ exprCards }}" as="c" hint-placeholder-count="3">
+        <div onClick="{{ c.pick }}" style="position:absolute;left:{{ c.left }};top:{{ c.top }};width:{{ c.width }};height:{{ c.height }};z-index:{{ c.z }};opacity:{{ c.op }};will-change:left,top,width,height;display:flex;flex-direction:column;gap:14px;cursor:{{ c.cursor }};transition:{{ c.trans }}">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:{{ c.labelPad }};transition:color .6s ease,padding .95s cubic-bezier(.22,1,.36,1);font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:{{ c.labelInk }}">
+            <span style="display:flex;align-items:center;gap:14px"><span style="color:#9C7C45;letter-spacing:.12em">{{ c.n }}</span><span style="width:40px;height:1px;background:rgba(11,12,14,.3)"></span></span>
+            <span>{{ c.tag }}</span>
+          </div>
+          <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#DDD8CE;box-shadow:{{ c.shadow }};transition:box-shadow .9s ease">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ c.focus }};display:block;filter:{{ c.filter }};transform:scale({{ c.scale }});transition:filter .9s ease,transform 1.4s cubic-bezier(.22,1,.36,1)">
+          </div>
+        </div>
+      </sc-for>
     </div>
-    <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden">
-      <image-slot id="v-detail-wheel" src="assets/detail-wheel-hq.webp" shape="rect" fit="cover" placeholder="Detail — forged wheel and caliper, 4:5" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+
+    <div style="margin-top:clamp(28px,4vh,44px);display:flex;align-items:center;justify-content:center;gap:clamp(20px,2.4vw,36px)">
+      <button type="button" onClick="{{ exprPrev }}" aria-label="Previous" style="width:48px;height:48px;border:1px solid rgba(11,12,14,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0B0C0E;font-size:15px;transition:border-color .22s ease" style-hover="border-color:#9C7C45">←</button>
+      <div style="display:flex;align-items:center;gap:8px">
+        <sc-for list="{{ exprDots }}" as="d" hint-placeholder-count="3">
+          <span onClick="{{ d.pick }}" style="display:block;box-sizing:content-box;width:{{ d.w }};height:2px;padding:10px 0;background-clip:content-box;background-color:{{ d.bg }};cursor:pointer;transition:width .6s cubic-bezier(.22,1,.36,1),background-color .4s ease"></span>
+        </sc-for>
+      </div>
+      <button type="button" onClick="{{ exprNext }}" aria-label="Next" style="width:48px;height:48px;border:1px solid rgba(11,12,14,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0B0C0E;font-size:15px;transition:border-color .22s ease" style-hover="border-color:#9C7C45">→</button>
+    </div>
+
+    <div style="position:relative;margin-top:clamp(32px,4.4vh,52px);min-height:clamp(120px,14vh,150px)">
+      <sc-for list="{{ exprCaps }}" as="k" hint-placeholder-count="3">
+        <div onClick="{{ k.pick }}" style="position:absolute;top:0;left:{{ k.left }};width:{{ k.width }};box-sizing:border-box;padding:{{ k.pad }};display:flex;flex-direction:column;gap:12px;opacity:{{ k.op }};cursor:{{ k.cursor }};transition:{{ k.trans }}">
+          <span style="display:flex;align-items:center;gap:14px;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.14em;color:#9C7C45">{{ k.n }}<span style="width:40px;height:1px;background:rgba(11,12,14,.3)"></span></span>
+          <span style="font-weight:300;font-size:clamp(20px,1.7vw,26px);line-height:1.15;letter-spacing:-.015em;color:#0B0C0E">{{ k.name }}</span>
+          <span style="max-width:36ch;font-size:15px;line-height:1.55;color:rgba(11,12,14,.66);text-wrap:pretty">{{ k.line }}</span>
+        </div>
+      </sc-for>
     </div>
   </section>
 
@@ -291,7 +344,7 @@
     <div style="margin-bottom:clamp(40px,6vh,120px)">
       <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:clamp(14px,3vw,48px);padding-bottom:clamp(20px,3vh,34px)">
         <h2 data-reveal="0" style="margin:0;font-weight:200;font-size:clamp(2.2rem,3.8vw,4.2rem);line-height:1;letter-spacing:-.038em;color:#FBFAF7">The collection</h2>
-        <p data-reveal="60" style="margin:0;font-weight:400;font-size:10px;line-height:1;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.46)">Three cars — MMXXVI</p>
+        
       </div>
       <div aria-hidden="true" style="display:flex;height:1px"><span style="width:clamp(48px,7vw,96px);background:#C6A76A"></span><span style="flex:1;background:rgba(251,250,247,.13)"></span></div>
     </div>
@@ -299,10 +352,10 @@
     <article style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(30px,4.4vw,84px);margin-bottom:clamp(56px,8vh,172px)">
       <div style="flex:1.62 1 520px;min-width:min(100%,290px);display:flex;flex-direction:column;gap:14px">
         <div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden">
-          <image-slot id="v-model-gt" src="assets/model-gt-hq.webp" shape="rect" fit="cover" placeholder="GT Coupé — three-quarter front at dusk, 16:9" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
+          <image-slot id="v-model-gt" src="assets/model-gt-red-road.jpg" shape="rect" fit="cover" placeholder="GT Coupé — three-quarter front at dusk, 16:9" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
           <span aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px 6px rgba(0,0,0,.5)"></span>
         </div>
-        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"><span>Fig. 01 — GT Coupé</span><span>Allocation open</span></div>
+        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"></div>
       </div>
       <div style="flex:.78 1 280px;min-width:min(100%,260px);display:flex;flex-direction:column;align-items:flex-start">
         <h3 data-reveal="0" style="margin:0;font-weight:200;font-size:clamp(1.7rem,3.3vw,3.5rem);line-height:.9;letter-spacing:-.042em;color:#FBFAF7">GT Coupé</h3>
@@ -331,20 +384,20 @@
       </div>
       <div data-m-first="true" style="flex:1.35 1 440px;min-width:min(100%,290px);order:1;display:flex;flex-direction:column;gap:14px">
         <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
-          <image-slot id="v-model-berlinetta" src="assets/model-berlinetta-hq.webp" shape="rect" fit="cover" placeholder="Berlinetta — rear three-quarter, studio wall, 4:3" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
+          <image-slot id="v-model-berlinetta" src="assets/model-berlinetta-silver.jpg" shape="rect" fit="cover" placeholder="Berlinetta — rear three-quarter, studio wall, 4:3" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
           <span aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px 6px rgba(0,0,0,.5)"></span>
         </div>
-        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"><span>Fig. 02 — Berlinetta</span><span>Ninety cars</span></div>
+        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"></div>
       </div>
     </article>
 
     <article style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(30px,4.4vw,84px)">
       <div style="flex:2.1 1 560px;min-width:min(100%,290px);display:flex;flex-direction:column;gap:14px">
-        <div style="position:relative;width:100%;aspect-ratio:21/9;overflow:hidden">
-          <image-slot id="v-model-tempesta" src="assets/model-tempesta-hq.webp" shape="rect" fit="cover" placeholder="Tempesta — on road, overcast, 21:9" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
+        <div style="position:relative;width:100%;aspect-ratio:2/1;overflow:hidden">
+          <image-slot id="v-model-tempesta" src="assets/model-tempesta-red.jpg" shape="rect" fit="cover" placeholder="Tempesta — on road, overcast, 21:9" style="position:absolute;inset:0;width:100%;height:100%;image-rendering:high-quality"></image-slot>
           <span aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px 6px rgba(0,0,0,.5)"></span>
         </div>
-        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"><span>Fig. 03 — Tempesta</span><span>By invitation</span></div>
+        <div style="display:flex;justify-content:space-between;gap:18px;font:400 10px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)"></div>
       </div>
       <div style="flex:.72 1 270px;min-width:min(100%,260px);display:flex;flex-direction:column;align-items:flex-start">
         <h3 data-reveal="0" style="margin:0;font-weight:200;font-size:clamp(1.7rem,3.3vw,3.5rem);line-height:.9;letter-spacing:-.042em;color:#FBFAF7">Tempesta</h3>
@@ -360,54 +413,55 @@
     </article>
   </section>
 
-  <section id="allocation" style="padding:clamp(70px,10vh,180px) clamp(20px,5vw,88px);border-top:1px solid rgba(251,250,247,.13)">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:start;gap:clamp(44px,5vw,110px)">
+  <section id="allocation" style="padding:clamp(64px,9vh,140px) clamp(20px,5vw,88px);border-top:1px solid rgba(251,250,247,.13)">
+    <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(44px,6vw,120px)">
 
-      <div style="display:flex;flex-direction:column;align-self:stretch;max-width:min(100%,560px)">
+      <div style="flex:.85 1 360px;min-width:min(100%,300px);display:flex;flex-direction:column">
         <h2 data-reveal="60" style="margin:0;font-weight:200;font-size:clamp(2.2rem,4.8vw,5.2rem);line-height:.94;letter-spacing:-.042em;color:#FBFAF7">Two hundred<br>and twenty cars.</h2>
         <p data-reveal="90" style="margin:clamp(24px,3.6vh,40px) 0 0;max-width:38ch;text-wrap:pretty">The 2026 series is held by invitation. Tell us which car you have in mind and a specialist in Modena will answer personally.</p>
         <div data-reveal="120" style="margin-top:clamp(38px,5.6vh,68px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr))">
           <div style="display:flex;flex-direction:column;gap:11px;padding-right:clamp(12px,2vw,28px)">
-            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">220</span><span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">cars</span></span>
-            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.44)">Series</span>
+            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">220</span><span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">cars</span></span>
+            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.62)">Series</span>
           </div>
           <div style="display:flex;flex-direction:column;gap:11px;padding:0 clamp(12px,2vw,28px);border-left:1px solid rgba(251,250,247,.16)">
-            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">2026</span><span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">spring</span></span>
-            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.44)">Deliveries</span>
+            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">2026</span><span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">spring</span></span>
+            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.62)">Deliveries</span>
           </div>
           <div style="display:flex;flex-direction:column;gap:11px;padding-left:clamp(12px,2vw,28px);border-left:1px solid rgba(251,250,247,.16)">
-            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">48</span><span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">hours</span></span>
-            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.44)">Reply within</span>
+            <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px"><span style="font-weight:200;font-size:clamp(1.55rem,2.3vw,2.4rem);line-height:1;letter-spacing:-.04em;color:#FBFAF7;font-variant-numeric:tabular-nums">48</span><span style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C6A76A">hours</span></span>
+            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.62)">Reply within</span>
           </div>
         </div>
-        <div data-reveal="150" data-alloc-media="true" style="position:relative;flex:1 1 clamp(220px,32vh,380px);margin-top:clamp(32px,4.6vh,60px);min-height:clamp(220px,32vh,380px);overflow:hidden">
-          <img src="assets/allocation-detail.png" alt="Vérona GT Coupé, rear quarter detail" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 52%">
-          <span aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(8,8,10,.5) 0%,rgba(8,8,10,0) 34%)"></span>
-        </div>
-        
+        <div data-reveal="180" data-alloc-media="true" style="margin-top:auto;padding-top:clamp(40px,6vh,72px)"><div style="padding-top:clamp(22px,3vh,30px);border-top:1px solid rgba(251,250,247,.13);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(20px,3vw,40px);font-size:10px;line-height:1.6;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.6)">
+          <span>Via dei Cavalieri 12<br>41121 Modena</span>
+          <span>Mon — Fri<br>09—18 CET</span>
+          <a href="tel:+390594128800" style="color:#FBFAF7">+39 059 412 8800</a>
+          <a href="mailto:clienti@verona.it" style="color:#FBFAF7">clienti@verona.it</a>
+        </div></div>
       </div>
 
-      <form data-reveal="150" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:clamp(22px,3vh,30px);padding:clamp(24px,3vw,44px);background:#0C0C0F;border:1px solid rgba(251,250,247,.11)">
+      <form data-reveal="150" onSubmit="{{ submit }}" style="flex:1.15 1 480px;min-width:min(100%,300px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(18px,2.4vh,24px);padding:clamp(24px,2.8vw,40px);background:#0C0C0F;border:1px solid rgba(251,250,247,.11)">
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="display:flex;align-items:center;gap:16px">
             <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#C6A76A">Request an allocation</span>
             <span style="flex:1;height:1px;background:rgba(251,250,247,.13)"></span>
           </div>
-          <p style="margin:0;max-width:44ch;font-size:14px;line-height:1.6;color:rgba(251,250,247,.56);text-wrap:pretty">Share a few details and a specialist in Modena will reply personally.</p>
+          <p style="margin:0;max-width:44ch;font-size:14px;line-height:1.6;color:rgba(251,250,247,.66);text-wrap:pretty">Share a few details and a specialist in Modena will reply personally.</p>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(18px,2.2vw,24px)">
           <label style="display:flex;flex-direction:column;gap:10px">
-            <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Full name</span>
+            <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Full name</span>
             <input type="text" name="name" autocomplete="name" required="" placeholder="Your full name" style="width:100%;box-sizing:border-box;padding:14px 16px;background:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;font-size:16px;color:#FBFAF7;transition:border-color .22s ease,background .22s ease" style-focus="border-color:#C6A76A;background:rgba(251,250,247,.05);outline:none">
           </label>
           <label style="display:flex;flex-direction:column;gap:10px">
-            <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Email</span>
+            <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Email</span>
             <input type="email" name="email" autocomplete="email" required="" placeholder="name@domain.com" style="width:100%;box-sizing:border-box;padding:14px 16px;background:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;font-size:16px;color:#FBFAF7;transition:border-color .22s ease,background .22s ease" style-focus="border-color:#C6A76A;background:rgba(251,250,247,.05);outline:none">
           </label>
           <label style="position:relative;display:flex;flex-direction:column;gap:10px">
             <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(251,250,247,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:16px;bottom:22px;pointer-events:none"><path d="m6 9 6 6 6-6"></path></svg>
-            <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Country</span>
+            <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Country</span>
             <select name="country" style="width:100%;box-sizing:border-box;padding:14px 42px 14px 16px;background-color:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;appearance:none;-webkit-appearance:none;cursor:pointer;font-size:16px;color:#FBFAF7;transition:border-color .22s ease,background-color .22s ease" style-focus="border-color:#C6A76A;background-color:rgba(251,250,247,.05);outline:none">
               <option value="it">Italia</option>
               <option value="fr">France</option>
@@ -420,14 +474,14 @@
             </select>
           </label>
           <label style="display:flex;flex-direction:column;gap:10px">
-            <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Phone</span>
+            <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Phone</span>
             <input type="tel" name="phone" autocomplete="tel" placeholder="+39 312 345 6789" style="width:100%;box-sizing:border-box;padding:14px 16px;background:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;font-size:16px;color:#FBFAF7;transition:border-color .22s ease,background .22s ease" style-focus="border-color:#C6A76A;background:rgba(251,250,247,.05);outline:none">
           </label>
         </div>
 
         <label style="position:relative;display:flex;flex-direction:column;gap:10px">
           <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(251,250,247,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:16px;bottom:22px;pointer-events:none"><path d="m6 9 6 6 6-6"></path></svg>
-          <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Car of interest</span>
+          <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Car of interest</span>
           <select name="model" style="width:100%;box-sizing:border-box;padding:14px 42px 14px 16px;background-color:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;appearance:none;-webkit-appearance:none;cursor:pointer;font-size:16px;color:#FBFAF7;transition:border-color .22s ease,background-color .22s ease" style-focus="border-color:#C6A76A;background-color:rgba(251,250,247,.05);outline:none">
             <option value="gt">GT Coupé</option>
             <option value="brl">Berlinetta</option>
@@ -437,8 +491,8 @@
         </label>
 
         <label style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.44)">Message <span style="color:rgba(251,250,247,.3)">(optional)</span></span>
-          <textarea name="message" rows="4" placeholder="Preferred configuration, delivery window, anything else." style="width:100%;box-sizing:border-box;padding:14px 16px;background:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;font-size:16px;line-height:1.6;color:#FBFAF7;resize:vertical;transition:border-color .22s ease,background .22s ease" style-focus="border-color:#C6A76A;background:rgba(251,250,247,.05);outline:none"></textarea>
+          <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.6)">Message <span style="color:rgba(251,250,247,.3)">(optional)</span></span>
+          <textarea name="message" rows="3" placeholder="Preferred configuration, delivery window, anything else." style="width:100%;box-sizing:border-box;padding:14px 16px;background:rgba(251,250,247,.03);border:1px solid rgba(251,250,247,.13);border-radius:0;font-size:16px;line-height:1.6;color:#FBFAF7;resize:vertical;transition:border-color .22s ease,background .22s ease" style-focus="border-color:#C6A76A;background:rgba(251,250,247,.05);outline:none"></textarea>
         </label>
 
         <button type="submit" style="display:flex;align-items:center;justify-content:center;gap:16px;width:100%;margin-top:clamp(2px,1vh,8px);padding:19px 28px;border:0;border-radius:0;background:#C6A76A;color:#0A0A0C;font-size:11px;letter-spacing:.26em;text-transform:uppercase;cursor:pointer;transition:background .22s ease" style-hover="background:#D8BC85" style-active="transform:scale(.985)">Submit request <span style="font-size:14px">→</span></button>
@@ -451,64 +505,117 @@
         </sc-if>
       </form>
     </div>
-
-    
-
-    <div style="margin-top:clamp(48px,7.5vh,96px);padding-top:clamp(22px,3.2vh,36px);border-top:1px solid rgba(251,250,247,.13);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px clamp(24px,4vw,72px);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.5)">
-      <span>Via dei Cavalieri 12 · 41121 Modena</span>
-      <a href="tel:+390594128800">+39 059 412 8800</a>
-      <a href="mailto:clienti@verona.it">clienti@verona.it</a>
-      <span>Mon — Fri · 09—18 CET</span>
-    </div>
   </section>
 
-  <footer style="margin-top:clamp(28px,4vh,180px);padding:clamp(70px,10vh,200px) clamp(20px,5vw,88px) clamp(30px,4.6vh,52px);border-top:1px solid rgba(251,250,247,.22);background:#060608">
-    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:clamp(28px,5vw,80px)">
-      <img src="assets/verona-lockup-header.png" alt="VÉRONA" style="width: 188px; height: 78px; display: block">
-      <p style="margin:0;max-width:26ch;font-weight:200;font-size:clamp(17px,1.5vw,24px);line-height:1.35;letter-spacing:-.02em;color:rgba(251,250,247,.82);text-wrap:pretty">Built in Modena, delivered by invitation. Two hundred and twenty cars a year, no more.</p>
-    </div>
-
-    <div aria-hidden="true" style="display:flex;height:1px;margin:clamp(38px,6vh,72px) 0 clamp(34px,5.4vh,64px)"><span style="width:clamp(48px,7vw,96px);background:#C6A76A"></span><span style="flex:1;background:rgba(251,250,247,.11)"></span></div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:clamp(28px,4.6vw,92px);align-items:flex-start">
-      <nav style="flex:.85 1 160px;display:flex;flex-direction:column;gap:14px">
-        <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.46)">The cars</span>
-        <a href="#figures" style="color:rgba(251,250,247,.6)">The car</a>
-        <a href="#materia" style="color:rgba(251,250,247,.6)">Materia</a>
-        <a href="#collection" style="color:rgba(251,250,247,.6)">Collection</a>
-        <a href="#allocation" style="color:rgba(251,250,247,.6)">Allocation</a>
+  <footer style="padding:clamp(80px,12vh,170px) clamp(20px,5vw,88px) clamp(34px,5vh,60px);border-top:1px solid rgba(251,250,247,.12);background:#08080A">
+    <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(40px,5vh,56px) 0">
+      <div data-fbrand="true" style="flex:1.3 1 340px;display:flex;flex-direction:column;gap:clamp(32px,5vh,52px);padding-right:clamp(24px,5vw,90px)">
+        <img src="assets/verona-lockup-header.png" alt="VÉRONA" style="width:clamp(180px,15vw,240px);height:auto;display:block">
+        <p style="margin:0;max-width:24ch;font-weight:300;font-size:clamp(18px,1.6vw,26px);line-height:1.4;letter-spacing:-.015em;color:rgba(251,250,247,.8);text-wrap:pretty">Built in Modena, delivered by invitation. Two hundred and twenty cars a year, no more.</p>
+      </div>
+      <nav data-fcol="true" data-ffirst="true" style="flex:1 1 200px;display:flex;flex-direction:column;gap:clamp(18px,2.6vh,26px);padding:4px clamp(24px,3.4vw,60px) 4px;border-left:1px solid rgba(251,250,247,.12)">
+        <span style="margin-bottom:clamp(6px,1.2vh,14px);font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#E3C08A">The cars</span>
+        <a href="#figures" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">The car</a>
+        <a href="#materia" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Materia</a>
+        <a href="#collection" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Collection</a>
+        <a href="#allocation" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Allocation</a>
       </nav>
-      <nav style="flex:.85 1 160px;display:flex;flex-direction:column;gap:14px">
-        <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.46)">Ownership</span>
-        <a href="#" style="color:rgba(251,250,247,.6)">Service</a>
-        <a href="#" style="color:rgba(251,250,247,.6)">Classiche</a>
-        <a href="#" style="color:rgba(251,250,247,.6)">Heritage</a>
-        <a href="#" style="color:rgba(251,250,247,.6)">Careers</a>
+      <nav data-fcol="true" style="flex:1 1 200px;display:flex;flex-direction:column;gap:clamp(18px,2.6vh,26px);padding:4px clamp(24px,3.4vw,60px) 4px;border-left:1px solid rgba(251,250,247,.12)">
+        <span style="margin-bottom:clamp(6px,1.2vh,14px);font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#E3C08A">Ownership</span>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Service</a>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Classiche</a>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Heritage</a>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Careers</a>
       </nav>
-      <nav style="flex:.85 1 160px;display:flex;flex-direction:column;gap:14px">
-        <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(251,250,247,.46)">Elsewhere</span>
-        <a href="#" style="color:rgba(251,250,247,.6)">Instagram</a>
-        <a href="#" style="color:rgba(251,250,247,.6)">YouTube</a>
-        <a href="#" style="color:rgba(251,250,247,.6)">LinkedIn</a>
+      <nav data-fcol="true" style="flex:1 1 200px;display:flex;flex-direction:column;gap:clamp(18px,2.6vh,26px);padding:4px 0 4px clamp(24px,3.4vw,60px);border-left:1px solid rgba(251,250,247,.12)">
+        <span style="margin-bottom:clamp(6px,1.2vh,14px);font:500 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#E3C08A">Elsewhere</span>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">Instagram</a>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">YouTube</a>
+        <a href="#" style="font-size:clamp(17px,1.3vw,21px);line-height:1.2;color:rgba(251,250,247,.9);transition:color .22s ease" style-hover="color:#E3C08A">LinkedIn</a>
       </nav>
     </div>
 
-    <div style="margin-top:clamp(46px,7.5vh,104px);padding-top:clamp(18px,2.6vh,30px);border-top:1px solid rgba(251,250,247,.09);display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,250,247,.46)">
-      <div style="display:flex;gap:clamp(16px,2.4vw,32px);flex-wrap:wrap"><span>© 2026 Vérona S.p.A.</span><a href="#">Legal</a><a href="#">Privacy</a><a href="#">Cookies</a></div>
-      <div style="display:flex;gap:clamp(16px,2.4vw,32px);flex-wrap:wrap"><span>Italia — Italiano</span></div>
+    <div style="margin-top:clamp(56px,9vh,110px);padding-top:clamp(26px,4vh,44px);border-top:1px solid rgba(251,250,247,.14);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px;font:400 11px/1 'PP Neue Montreal','Neue Montreal',Switzer,'Helvetica Neue',Helvetica,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,247,.62)">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px clamp(18px,2.4vw,36px)"><span>© 2026 Vérona S.p.A.</span><span aria-hidden="true" style="width:1px;height:16px;background:rgba(251,250,247,.22)"></span><a href="#" style-hover="color:#FBFAF7">Legal</a><span aria-hidden="true" style="width:1px;height:16px;background:rgba(251,250,247,.22)"></span><a href="#" style-hover="color:#FBFAF7">Privacy</a><span aria-hidden="true" style="width:1px;height:16px;background:rgba(251,250,247,.22)"></span><a href="#" style-hover="color:#FBFAF7">Cookies</a></div>
+      <span>Italia — Italiano</span>
     </div>
   </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;reveals&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
-  state = { tab: 0, sent: false, narrow: false, menu: false };
+  state = { tab: 0, sent: false, narrow: false, menu: false, feat: 1, vw: 1440, wrap: null };
 
   renderVals() {
     const gold = "#C6A76A", dim = "rgba(251,250,247,.4)", none = "transparent";
     const t = this.state.tab;
     const v = {
       isPowertrain: t === 0, isChassis: t === 1, isCabin: t === 2,
+      ...(() => {
+        const f = this.state.feat, mob = this.state.vw <= 760;
+        const cars = [
+          { src: "assets/detail-car-silver.png", alt: "Silver GT Coupé on desert gravel at dusk", tag: "Desert drive", name: "Desert drive", line: "Power meets open ground. Nothing between the car and the horizon.", focus: "66% 64%" },
+          { src: "assets/detail-car-black.png", alt: "Black four-door GT on an autumn road", tag: "Autumn road", name: "Autumn road", line: "Dark paint, yellow calipers, wet leaves. Quiet until it isn't.", focus: "52% 58%" },
+          { src: "assets/detail-car-white.png", alt: "White four-door GT on a coastal highway", tag: "Open highway", name: "Open highway", line: "Built for distance. Four hundred kilometres feel like forty.", focus: "56% 60%" }
+        ];
+        const slots = mob
+          ? { C: ["7%", "0%", "86%", "100%"], R: ["95%", "8%", "80%", "84%"], L: ["-77%", "8%", "80%", "84%"] }
+          : { C: ["30%", "0%", "40%", "100%"], R: ["68%", "10%", "32%", "80%"], L: ["0%", "10%", "32%", "80%"] };
+        const slotOf = i => ["C", "R", "L"][(i - f + 3) % 3];
+        const go = i => () => {
+          if (i === this.state.feat) return;
+          const oldSlot = j => ["C", "R", "L"][(j - this.state.feat + 3) % 3];
+          const newSlot = j => ["C", "R", "L"][(j - i + 3) % 3];
+          const w = [0, 1, 2].find(j => (oldSlot(j) === "L" && newSlot(j) === "R") || (oldSlot(j) === "R" && newSlot(j) === "L"));
+          clearTimeout(this._wrapT);
+          this.setState({ feat: i, wrap: w });
+          this._wrapT = setTimeout(() => this.setState({ wrap: null }), 360);
+        };
+        const E = "cubic-bezier(.22,1,.36,1)";
+        const slide = ["left", "top", "width", "height"].map(p => p + " 1s " + E).join(",") + ",opacity .7s ease";
+        const jump = "opacity .3s ease," + ["left", "top", "width", "height"].map(p => p + " 0s .32s").join(",");
+        const exprCards = cars.map((c, i) => {
+          const s = slotOf(i), on = s === "C", p = slots[s];
+          return { ...c, n: "0" + (i + 1), left: p[0], top: p[1], width: p[2], height: p[3], z: on ? 3 : 1,
+            cursor: on ? "default" : "pointer", pick: go(i),
+            op: this.state.wrap === i ? 0 : 1, trans: this.state.wrap === i ? jump : slide,
+            labelPad: mob || on ? "0" : (s === "L" ? "0 10% 0 0" : "0 0 0 10%"),
+            labelInk: on ? "#0B0C0E" : "rgba(11,12,14,.5)",
+            shadow: on ? "0 40px 70px -46px rgba(11,12,14,.55)" : "none",
+            filter: on ? "none" : "saturate(.55) brightness(.94)", scale: on ? 1 : 1.04 };
+        });
+        const exprCaps = exprCards.map((c, i) => {
+          const on = i === f;
+          return { n: c.n, name: c.name, line: c.line, pick: c.pick, cursor: c.cursor, left: c.left, width: c.width,
+            pad: c.labelPad, op: this.state.wrap === i ? 0 : (on ? 1 : 0.5),
+            trans: this.state.wrap === i ? jump : "left 1s " + E + ",width 1s " + E + ",padding 1s " + E + ",opacity .7s ease" };
+        });
+        return {
+          exprCards, exprCaps,
+          capLeft: mob ? "7%" : "30%", capWidth: mob ? "86%" : "40%",
+          stageRatio: mob ? "4 / 3.4" : "1600 / 470",
+          capCols: mob ? "minmax(0,1fr)" : "repeat(3,minmax(0,1fr))",
+          exprDots: cars.map((_, i) => ({ w: i === f ? "48px" : "18px", bg: i === f ? "#9C7C45" : "rgba(11,12,14,.24)", pick: go(i) })),
+          exprPrev: () => go((this.state.feat + 2) % 3)(),
+          exprNext: () => go((this.state.feat + 1) % 3)()
+        };
+      })(),
+      ...(() => {
+        const m = n => "url(https://unpkg.com/lucide-static@0.460.0/icons/" + n + ".svg) center/contain no-repeat";
+        const sets = [
+          [["Engine","4.0L V8 biturbo","4.0L V8 biturbo","Twin-turbo","fuel"],["Output","Maximum power","612 bhp at 6,800 rpm","Max power","settings"],["Torque","Wide plateau","800 Nm, 2,200–5,000 rpm","Max torque","gauge"],["Gearbox","Responsive and precise","8-speed dual clutch","Transmission","disc-3"]],
+          [["Structure","Stiff and light","Bonded aluminium","Chassis","box"],["Mass","Before fluids","1,640 kg dry","Kerb weight","weight"],["Suspension","Reads the road","Adaptive double wishbone","Front and rear","move-vertical"],["Brakes","Fade-free","Carbon ceramic, 410 mm","Front discs","disc"]],
+          [["Hide","Single tannery","Sabbia leather","Upholstery","layers"],["Trim","No gloss","Brushed alloy","Surfaces","square"],["Instruments","Needles, not pixels","Analogue tachometer","Cluster","gauge"],["Assembly","By hand in Modena","Ninety hours per cabin","Craft","hand"]]
+        ];
+        const notes = ["Figures provisional · Performance may vary · EU model shown", "Rear-wheel steering standard · Figures provisional", "Instruments, not gadgets · Specification may vary"];
+        const on = i => t === i;
+        return {
+          specRows: sets[t].map(([k, sub, v, cap, ic]) => ({ k, sub, v, cap, mask: m(ic) })),
+          specNote: notes[t],
+          tabInk0: on(0) ? "#FBFAF7" : "rgba(251,250,247,.5)", tabInk1: on(1) ? "#FBFAF7" : "rgba(251,250,247,.5)", tabInk2: on(2) ? "#FBFAF7" : "rgba(251,250,247,.5)",
+          tabRule0: on(0) ? "#E3C08A" : "transparent", tabRule1: on(1) ? "#E3C08A" : "transparent", tabRule2: on(2) ? "#E3C08A" : "transparent"
+        };
+      })(),
       tab0: () => this.setState({ tab: 0 }),
       tab1: () => this.setState({ tab: 1 }),
       tab2: () => this.setState({ tab: 2 }),
@@ -597,7 +704,7 @@ class Component extends DCLogic {
 
   // burger below 860px; the inline nav wraps ("The car" on two lines) under that
   initNavMode() {
-    this._mq = matchMedia("(max-width: 860px)");
+    this._mq = matchMedia("(max-width: 1100px)");
     const sync = () => {
       const narrow = this._mq.matches;
       this.setState(s => ({ narrow, menu: narrow ? s.menu : false }));
@@ -620,6 +727,9 @@ class Component extends DCLogic {
   };
 
   componentDidMount() {
+    this._onVw = () => { if (Math.abs((this.state.vw || 0) - innerWidth) > 1) this.setState({ vw: innerWidth }); };
+    this._onVw();
+    addEventListener("resize", this._onVw);
     this.initLenis();
     this.initNavMode();
     const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -744,14 +854,18 @@ class Component extends DCLogic {
         head.style.padding = "20px clamp(20px,5vw,88px)";
       }
       if (lockup) lockup.style.filter = onLight ? "brightness(0) opacity(.8)" : "none";
+      head.querySelectorAll("[data-bar]").forEach(b => { b.style.background = onLight ? "#0B0C0E" : "#FBFAF7"; });
+      const meta = head.querySelector("[data-head-meta]"); if (meta) meta.style.color = onLight ? "rgba(11,12,14,.7)" : "rgba(251,250,247,.82)";
+      const cta = head.querySelector("[data-head-cta]"); if (cta) { cta.style.color = onLight ? "#8A6D3A" : "#E2C795"; cta.style.borderColor = onLight ? "rgba(138,109,58,.6)" : "rgba(214,184,128,.7)"; }
 
       let active = null;
       secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= vh * 0.42) active = links[i]; });
       links.forEach(a => {
         const on = a === active;
         a.style.color = on
-          ? (onLight ? "#0B0C0E" : "#FBFAF7")
-          : (onLight ? "rgba(11,12,14,.52)" : "rgba(251,250,247,.58)");
+          ? (onLight ? "#8A6D3A" : "#E2C795")
+          : (onLight ? "rgba(11,12,14,.66)" : "rgba(251,250,247,.86)");
+        a.style.borderBottomColor = on ? (onLight ? "#8A6D3A" : "#E2C795") : "transparent";
       });
 
       if (!rm) pars.forEach(p => {
@@ -770,6 +884,7 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    if (this._onVw) removeEventListener("resize", this._onVw);
     if (this._mq && this._mqSync) this._mq.removeEventListener("change", this._mqSync);
     if (this._raf) cancelAnimationFrame(this._raf);
     if (this._lenisTimer) clearTimeout(this._lenisTimer);
